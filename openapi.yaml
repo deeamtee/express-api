@@ -21,8 +21,8 @@ paths:
     get:
       tags:
         - Cards
-      summary: Returns all character cards from the system
-      description: Returns all cards from the system
+      summary: Returns all character cards
+      description: Returns all character cards
       operationId: getCards
       responses:
         '200':
@@ -30,9 +30,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Cards'
+                $ref: '#/components/schemas/Cards'
                   
         default:
           description: unexpected error
@@ -128,9 +126,9 @@ components:
           type: array
           items: 
             $ref: '#/components/schemas/NewCard'
-        pagination:
-          type: object
-          $ref: '#/components/schemas/Pagination'
+        # pagination:
+        #   type: object
+          # $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -153,9 +151,11 @@ components:
     NewCard:
       type: object
       required:
-        - name
+        - title
       properties:
-        name:
+        title:
+          type: string
+        description:
           type: string
         img:
           type: string
