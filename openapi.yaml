@@ -50,7 +50,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewCard'
+              $ref: '#/components/schemas/FullCard'
       responses:
         '200':
           description: card response
@@ -87,7 +87,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Card'
+                $ref: '#/components/schemas/FullCard'
+                type: object
+                required:
+                  - story
+                properties:
+                  id:
+                    type: string
         default:
           description: unexpected error
           content:
@@ -125,7 +131,7 @@ components:
         data:
           type: array
           items: 
-            $ref: '#/components/schemas/NewCard'
+            $ref: '#/components/schemas/Card'
         # pagination:
         #   type: object
           # $ref: '#/components/schemas/Pagination'
@@ -148,6 +154,13 @@ components:
             id:
               type: integer
               format: int64
+    FullCard:
+      allOf:
+        - $ref: '#/components/schemas/NewCard'
+        - type: object
+          properties:
+            story:
+              type: string
     NewCard:
       type: object
       required:
