@@ -44,8 +44,28 @@ async function addCard(req, res) {
   }
 }
 
+async function deleteCard(req, res) {
+  const { id } = req.params;
+  try {
+    const deletedCard = await Card.findByIdAndDelete(id); // Находим и удаляем карточку по ID
+    if (!deletedCard) {
+      return res.status(404).send({
+        error: 'Card not found',
+      });
+    }
+    res.status(200).send({
+      message: 'Card deleted successfully',
+    });
+  } catch (err) {
+    res.status(500).send({
+      error: 'Failed to delete card from the database',
+    });
+  }
+}
+
 module.exports = {
   getCards,
   getCard,
-  addCard
+  addCard,
+  deleteCard
 };
