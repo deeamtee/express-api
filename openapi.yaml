@@ -79,8 +79,7 @@ paths:
           description: ID of card to fetch
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         '200':
           description: card response
@@ -92,7 +91,7 @@ paths:
                 required:
                   - story
                 properties:
-                  id:
+                  _id:
                     type: string
         default:
           description: unexpected error
@@ -149,11 +148,10 @@ components:
         - $ref: '#/components/schemas/NewCard'
         - type: object
           required:
-            - id
+            - _id
           properties:
-            id:
-              type: integer
-              format: int64
+            _id:
+              type: string
     FullCard:
       allOf:
         - $ref: '#/components/schemas/NewCard'
